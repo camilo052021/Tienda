@@ -1,0 +1,132 @@
+<html>
+
+<head>
+
+  {% load static %}
+
+  <head>
+    <title>{% block titulo %}{% endblock %}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/mor.jpg' %}">
+  </head>
+
+  <!-- Bootstrap -->
+  <link href="{% static 'app/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Fonts -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+
+  <!-- Styles -->
+  <link href="{% static 'app/css/gestion.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  {% if user.is_authenticated %}
+  <h2 style="color: gold; text-align: center; font-size: xx-large;">
+    <span class="site-heading-lower">Tienda Mor</span>
+    <p>Bienvenid@ {{request.user}}</p>
+  </h2>
+  {% else %}
+  <h2 style="color: gold; text-align: center; font-size: xx-large;">
+    <span class="site-heading-lower">Tienda Mor</span>
+    <p>Bienvenid@ Necesitas Registarte</p>
+  </h2>
+  {% endif %}
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'inicio' %}">Gestión
+        de
+        Pedidos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'inicio' %}" style="color: gold;">Inicio</a>
+          </li>
+          <li class="nav-item {% if request.path == '/servicios/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'servicios' %}"
+              style="color: gold;">Servicios</a>
+          </li>
+          <li class="nav-item {% if request.path == '/tienda/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'tienda' %}" style="color: gold;">Tienda</a>
+          </li>
+          <li class="nav-item {% if request.path == '/contacto/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'contacto' %}"
+              style="color: gold;">Contacto</a>
+          </li>
+          <li class="nav-item {% if request.path|slice:':6' == '/blog/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}" style="color: gold;">Blog</a>
+          </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item {% if request.path == '/logout/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'logout' %}" style="color: gold;">logout</a>
+          </li>
+
+          {% else %}
+          <li class="nav-item {% if request.path == '/registro/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'registro' %}"
+              style="color: gold;">Registro</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/login/' %} active {% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}" style="color: gold;">login</a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Contenido cambiante -->
+  {% block content %}
+
+  {% endblock %}
+
+
+  <!-- Footer -->
+  <footer class="footer text-faded text-center py-5" style="color: gold;">
+    <div class="container">
+      <p class="m-0">
+
+        <img src="{% static 'app/img/whatsapp.jpg' %}" alt="" style="width:50px">
+        <a href="https://web.whatsapp.com/" class="link">
+          Whatsapp
+        </a>
+
+        <img src="{% static 'app/img/facebook.jpg' %}" alt="" style="width:50px">
+        <a href="https://www.facebook.com/moreresbella" class="link">
+          Facebook
+        </a>
+        <img src="{% static 'app/img/instagram.jpg' %}" alt="" style="width:50px">
+        <a href="https://www.instagram.com/morsynthetichair/" class="link">
+          Instagram
+        </a>
+      </p>
+
+      <p class="m-0 mbt">
+        <a href="#" class="link">Política de privacidad</a> ·
+        <a href="#" class="link">Aviso legal</a> ·
+        <a href="#" class="link">Cookies</a>
+      </p>
+      <p class="m-0 mbt1">&copy; Mor Shynthetic Hair 2021</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap -->
+  <script src="{% static 'app/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+
+</html>

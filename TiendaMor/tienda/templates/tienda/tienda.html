@@ -1,0 +1,59 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+ <!-- Categorías -->
+    <div style="float:left ; width: auto" class="contenedorFormulario">
+        <p style="text-align: center; color: gold;"></p>
+        {% for categoria in categorias %}
+        <ul>
+            <a href="{% url 'categoria' categoria.id %}" 
+            class="btn btn-sm btn-success" 
+            style="background-color: black; color:  gold; width: 100"
+            >{{categoria.nombre}}</a> &nbsp;&nbsp;
+        </ul>
+        {% endfor %}
+    </div>
+
+ <!-- Carrito -->
+    <div style="float:right ; width: auto;" class="contenedorFormulario">
+        <p style="color: gold;">Ir al Carro</p>
+        <a href="{% url 'carro:carro' %}">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'app/img/carrito.jpg' %}" alt=""
+                style="width:80px">
+        </a>
+        <p style="color: gold;">Valor: $ {{importe_total_carro}}</p>
+    </div>
+
+ <!-- listado Productos -->
+    <div class="row">
+        {% for producto in productos %}
+
+        <div class="col-md-3">
+            <div class="card" style="width: 100%; margin: 5px 5px;">
+                <a href="{{producto.imagen.url}}">
+                    <img src="{{producto.imagen.url}}" width="200" height="300" class="card-img-top">
+                </a>
+                <div class="card-body" style="text-align: center;">
+                    <h7 class="card-title">{{producto.nombre}}</h7>
+                    <p class="card-text">$ {{producto.precio}}</p>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al carro</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+<br>
+<div>
+    {% include 'tienda/paginador.html' %}
+</div>
+{% endblock %}

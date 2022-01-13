@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+{% block content %} 
+
+{% load crispy_forms_tags %}         
+
+<!--Register--> 
+<div class="contenedorFormulario">
+	<h1 style="text-align: center; color: gold;">Registro</h1>
+	<form method="POST" style="text-align: center; color: gold;">
+		{% csrf_token %}
+		{{ register_form|crispy }}   
+		<br>
+              
+		<button class="btn btn-primary" type="submit" style="color: gold; background-color: black;">Registro</button>
+		{% if form.errors %}
+			<p>Validar que los datos esten correctos</p>
+		{% endif %}  
+	</form>	
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="contenedorFormulario">
+    {% if 'valido' in request.GET %}
+
+        <p style="color: gold;"> LA INFORMACION SE HA ENVIADO CORRECTAMENTE</p>
+
+    {% endif %}
+    <form action="" method="POST" style="text-align: center">
+        {% csrf_token %}
+    <table style="color: gold; margin: 15px auto;"> 
+        {{formulario_contacto}}
+    </table>
+    <input type="submit" style="width: 120px; background-color: black; color: gold;">
+    </form>
+    
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "app/base.html" %}
+
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<div class="contenedorFormulario">
+  <h1 style="text-align: center; color: gold;">Login</h1>
+  <form method="POST" style="text-align: center; color: gold;">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <br>
+    {% if form.errors %}
+    <p>Usuario o clave incorrecta</p>
+    {% endif %}
+    <button class="btn btn-primary" type="submit" style="color: gold; background-color: black;">Login</button>
+  </form>
+  <p class="text-center" > <a href="{% url 'reset_password' %}" style="text-align: center; color: gold;">Olvidó su Clave</a>.</p>
+</div>
+
+{% endblock %}

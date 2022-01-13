@@ -1,0 +1,40 @@
+<!-- Datos -->
+
+<div>
+	<h6><a href="{% url 'inicio' %}">{{ request.user }}</a></h6>
+	<br>
+</div>
+
+<!-- Follow items -->
+
+<div>
+	<div>
+		<div>
+			<h6>Nombre: {{ request.user.datos.nombre }}</h6>
+		</div>
+		<div>
+			<h6>Correo: {{ request.user.email }}</h6>
+		</div>
+		<div>
+			<h6>Ciudad: {{ request.user.datos.ciudad }}</h6>
+		</div>
+		<div>
+			<h6>Dirección: {{ request.user.datos.direccion }}</h6>
+		</div>
+		<div>
+			<h6>Celular: {{ request.user.datos.celular }}</h6>
+		</div>
+	</div>
+	<br>
+</div>
+
+<div>	
+	<div>
+		<button style="background-color: black;">
+			<a href="{% url 'editar_datos' %}" style="color: gold;">Editar Datos</a>
+		</button>
+		
+	</div>
+</div>
+
+<!-- block super -->

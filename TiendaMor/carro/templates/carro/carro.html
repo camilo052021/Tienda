@@ -1,0 +1,76 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div style="float:right ; width: auto;" class="contenedorFormulario">
+    <div>
+        {% include 'datos/datos.html' %}
+    </div>
+</div>
+
+<div class="contenedorFormulario">
+    <table class="table table-bordered" style="color: gold;">
+
+        <head>
+            <th colspan="5" class="text-center">
+                Carro Compras
+            </th>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Valor</th>
+                <th>Opción</th>
+            </tr>
+        </head>
+
+        <tbody>
+            {% if request.session.carro.items %}
+            <tr colspan="4">
+                <div class="alert alert-danger text-center">
+                    <a href="{% url 'carro:limpiar' %}" class="btn btn-sm btn-danger">Vaciar</a>
+                </div>
+            </tr>
+            {% for key, value in request.session.carro.items %}
+            <tr class="text-center">
+                <td>{{value.nombre}}</td>
+                <td>{{value.cantidad}}</td>
+                <td>$ {{value.valor_unitario}}</td>
+                <td>
+                    <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm btn-success">+</a>
+                    <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm btn-success">-</a><br>
+                    $ {{value.precio}}
+                </td>
+                <td>
+                    <a href="{% url 'carro:eliminar' value.producto_id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+            {% else %}
+            <tr colspan="4">
+                <div class="alert alert-danger text-center">
+                    Sin Productos
+                </div>
+            </tr>
+            {% endif %}
+
+</div>
+
+</tbody>
+
+
+<rfoot>
+    <td colspan="5">
+        Total: $ {{importe_total_carro}}
+    </td>
+</rfoot>
+
+</table>
+
+
+</div>
+
+{% endblock %}
